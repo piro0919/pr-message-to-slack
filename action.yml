@@ -1,0 +1,8 @@
+name: pr-message-to-slack
+description: Send PR review request message to Slack.
+branding:
+  icon: bell
+  color: green
+runs:
+  using: node16
+  main: dist/index.js

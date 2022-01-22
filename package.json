@@ -1,0 +1,27 @@
+{
+  "name": "pr-message-to-slack",
+  "version": "1.0.0",
+  "description": "A GitHub Action to send PR review request message to Slack.",
+  "main": "dist/index.js",
+  "scripts": {
+    "format-check": "prettier --check .",
+    "lint-check": "eslint index.ts",
+    "build": "npx @vercel/ncc build index.ts"
+  },
+  "author": "HirokiSAKABE <hiroki.sakabe@icloud.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "1.6.0",
+    "@actions/github": "5.0.0",
+    "axios": "0.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.21",
+    "@typescript-eslint/eslint-plugin": "5.10.0",
+    "@typescript-eslint/parser": "5.10.0",
+    "eslint": "8.7.0",
+    "eslint-config-prettier": "8.3.0",
+    "prettier": "2.5.1",
+    "typescript": "4.5.5"
+  }
+}
