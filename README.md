@@ -32,7 +32,7 @@ jobs:
     steps:
       # To use slack-id.json
       - uses: actions/checkout@v2
-      - uses: hirokisakabe/pr-message-to-slack@1.0.0
+      - uses: hirokisakabe/pr-message-to-slack@v1.0.0
         env:
           # https://hooks.slack.com/...
           PR_MESSAGE_SLACK_WEBHOOK_URL: ${{ secrets.PR_MESSAGE_SLACK_WEBHOOK_URL }}
