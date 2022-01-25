@@ -54,6 +54,53 @@ const notify_review_request = async (
   await axios.post(webhook_url, { text });
 };
 
+const notify_unlocked = async (
+  payload_pull_request: PullRequestPayload,
+  webhook_url: string
+) => {
+  const assignees = payload_pull_request.assignees;
+  const title = payload_pull_request.title;
+  const html_url = payload_pull_request.html_url;
+
+  if (!html_url) {
+    throw new Error("Could not retrieve PR URL.");
+  }
+
+  if (!Array.isArray(assignees) || assignees.length === 0) {
+    console.log("Could not retrieve 'assignees'.");
+    return;
+  }
+
+  const github_slack_id_map = await load_slack_id_map();
+
+  let text = "";
+
+  assignees.forEach((assignee) => {
+    const github_username = assignee.login;
+
+    if (typeof github_username !== "string") {
+      return;
+    }
+
+    let slack_id = github_slack_id_map[github_username];
+
+    if (typeof slack_id !== "string") {
+      // If Slack member ID is not specified, use GitHub username instead.
+      slack_id = github_username;
+    }
+
+    text = text.concat(`<@${slack_id}> `);
+  });
+
+  if (typeof title === "string") {
+    text = text.concat(`\n*PR is unlocked: * <${html_url}|${title}>`);
+  } else {
+    text = text.concat(`\n*PR is unlocked: * ${html_url}`);
+  }
+
+  await axios.post(webhook_url, { text });
+};
+
 const load_slack_id_map = async () => {
   let github_slack_id_map: { [github_username: string]: unknown } = {};
   try {
@@ -84,6 +131,10 @@ const main = async () => {
     switch (action) {
       case "review_requested": {
         await notify_review_request(payload_pull_request, url);
+        break;
+      }
+      case "unlocked": {
+        await notify_unlocked(payload_pull_request, url);
         break;
       }
       default: {
