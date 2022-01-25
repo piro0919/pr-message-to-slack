@@ -26,6 +26,11 @@ on:
     # 'types' only supports 'review_requested'
     types: [review_requested]
 
+# Prevent sending multiple messages when there are multiple reviewers.
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   pr-message-to-slack:
     runs-on: ubuntu-latest
