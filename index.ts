@@ -57,7 +57,7 @@ const main = async () => {
         slack_id = github_username;
       }
 
-      text = text.concat(`<@${slack_id}>`);
+      text = text.concat(`<@${slack_id}> `);
     });
 
     if (typeof title === "string") {
