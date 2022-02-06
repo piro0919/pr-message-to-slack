@@ -12,6 +12,7 @@ const main = async () => {
     const reviewers = payload_pull_request?.requested_reviewers;
     const title = payload_pull_request?.title;
     const html_url = payload_pull_request?.html_url;
+    const number = payload_pull_request?.number;
 
     const url = process.env.PR_MESSAGE_SLACK_WEBHOOK_URL; // https://hooks.slack.com/...
     if (!url) {
@@ -60,8 +61,12 @@ const main = async () => {
       text = text.concat(`<@${slack_id}> `);
     });
 
+    const number_with_hash = number !== undefined ? `#${number}` : "";
+
     if (typeof title === "string") {
-      text = text.concat(`\n*Review requested: * <${html_url}|${title}>`);
+      text = text.concat(
+        `\n*Review requested: * <${html_url}|${title}${number_with_hash}>`
+      );
     } else {
       text = text.concat(`\n*Review requested: * ${html_url}`);
     }
