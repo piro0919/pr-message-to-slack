@@ -1,3 +1,7 @@
+# deprecated
+
+Use [Official GitHub Integration](https://github.com/integrations/slack) instead.
+
 # pr-message-to-slack
 
 A GitHub Action to send PR review request message to Slack.
