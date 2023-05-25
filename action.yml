@@ -1,4 +1,4 @@
-name: pr-message-to-slack
+name: pr-message-to-slack2
 description: Send PR review request message to Slack.
 branding:
   icon: bell
