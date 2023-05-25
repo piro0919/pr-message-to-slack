@@ -23,10 +23,10 @@ const main = async () => {
       throw new Error("Could not retrieve PR URL.");
     }
 
-    if (action !== "review_requested") {
-      console.log("'types' only supports 'review_requested'.");
-      return;
-    }
+    // if (action !== "review_requested") {
+    //   console.log("'types' only supports 'review_requested'.");
+    //   return;
+    // }
 
     if (!Array.isArray(reviewers) || reviewers.length === 0) {
       console.log("Could not retrieve 'reviewers'.");
