@@ -2,7 +2,7 @@
   "author": "piro <piro.haniwa@gmail.com>",
   "dependencies": {
     "@actions/core": "1.6.0",
-    "@actions/github": "5.0.0",
+    "@actions/github": "5.1.1",
     "axios": "0.25.0"
   },
   "description": "A GitHub Action to send PR review request message to Slack.",
